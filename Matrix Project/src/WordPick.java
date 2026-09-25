@@ -4,8 +4,8 @@ public class WordPick
 		
 		public static String pickWord()
 		{
-			String word = "words";
-			
+			String wordPick = "words";
+			return wordPick;
 		}
 
 	}
