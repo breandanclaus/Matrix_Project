@@ -2,10 +2,11 @@
 public class WordPick
 	{
 		
-		public static String pickWord()
+		public static String[] pickWord()
 		{
 			String wordPick = "words";
-			return wordPick;
+			String[] word = wordPick.split("");
+			return word;
 		}
 
 	}
