@@ -11,9 +11,8 @@ public class WordPick
 		
 		public static String pickWord()
 		{
-			int wordNumber = (int) (Math.random() * 40) + 1;
+			int wordNumber = (int) (Math.random() * WordList.splitList().length);
 			String chosenWord = WordList.splitList()[wordNumber];
-			System.out.println(chosenWord);
 			return chosenWord;
 		}
 
