@@ -5,7 +5,7 @@ public class Game
 		
 		public static void runGame()
 			{
-				String[] correctWord = WordPick.pickWord();
+				String[] correctWord = WordPick.splitWord();
 				for (int i = 0; i < 6; i++)
 					{
 						String[] guess = takeGuess();
@@ -89,7 +89,6 @@ public class Game
 				}
 			else
 				{
-					System.out.println("You don't win, yet");
 					won = false;
 				}
 			return won;
