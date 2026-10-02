@@ -2,7 +2,10 @@ import java.util.Scanner;
 public class Game
 	{
 		static int guessCounter = -1;
-		
+		public static final String GREEN = "\u001B[30;42m";
+		public static final String YELLOW = "\u001B[30;43m";
+		public static final String GREY = "\u001B[30;100m";
+		public static final String RESET = "\u001B[0m";
 		public static void runGame()
 			{
 				String correctWord = WordPick.pickWord();
@@ -23,7 +26,8 @@ public class Game
 					}
 				if (won == false)
 					{
-						System.out.println(correctWord);
+						System.out.println("You Lose!");
+						System.out.println("The word was " + correctWord);
 					}
 			}
 		
@@ -31,10 +35,25 @@ public class Game
 		{
 			Scanner userStringInput = new Scanner(System.in);
 			boolean noGuess = true;
+			boolean realGuess = false;
 			String guess = "";
+			String[] guessSplit = new String[5];
 			while (noGuess)
 			{
 				guess = userStringInput.nextLine();
+				guessSplit = guess.split("");
+				for (int i = 0; i < WordList.splitList().length; i++)
+					{
+						if (WordList.splitList()[i].contains(guess))
+							{
+								realGuess = true;
+								i = WordList.splitList().length + 1;
+							}
+						else 
+							{
+								realGuess = false;
+							}
+					}
 				if (guess.length() > 5)
 					{
 						System.out.println("Please guess a word with 5 letters.");
@@ -43,12 +62,16 @@ public class Game
 					{
 						System.out.println("Please guess a word with 5 letters.");
 					}
+				else if (realGuess == false)
+					{
+						System.out.println("That word isn't isn't in the word list.");
+					}
 				else
 					{
 						noGuess = false;
 					}
 			}
-			String[] guessSplit = guess.split("");
+			
 			guessCounter++;
 			return guessSplit;
 		}
@@ -66,15 +89,19 @@ public class Game
 				{
 					if (guess[i].equals(correctSplit[i]))
 						{
-							Display.colorGrid[guessCounter][i] = "1";
+							
+							Display.grid[guessCounter][i] = (GREEN + guess[i] + RESET); 
+							
 						}
 					else if (correctWordStr.contains(guess[i]))
 						{
-							Display.colorGrid[guessCounter][i] = "2";
+							
+							Display.grid[guessCounter][i] = (YELLOW + guess[i] + RESET); 
 						}
 					else
 						{
-							Display.colorGrid[guessCounter][i] = "0";
+							
+							Display.grid[guessCounter][i] = (GREY + guess[i] + RESET); 
 						}
 				}
 			
