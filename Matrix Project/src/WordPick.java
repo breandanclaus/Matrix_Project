@@ -2,12 +2,6 @@
 public class WordPick
 	{
 		
-		public static String[] splitWord()
-		{
-			String wordPick = pickWord();
-			String[] word = wordPick.split("");
-			return word;
-		}
 		
 		public static String pickWord()
 		{

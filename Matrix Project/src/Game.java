@@ -5,12 +5,13 @@ public class Game
 		
 		public static void runGame()
 			{
-				String[] correctWord = WordPick.splitWord();
+				String correctWord = WordPick.pickWord();
+				boolean won = false;
 				for (int i = 0; i < 6; i++)
 					{
 						String[] guess = takeGuess();
 						displayGuess(guess, correctWord);
-						boolean won = winCheck(guess, correctWord);
+						won = winCheck(guess, correctWord);
 						if (won == true)
 							{
 								i = 6;
@@ -19,6 +20,10 @@ public class Game
 							{
 								continue;
 							}
+					}
+				if (won == false)
+					{
+						System.out.println(correctWord);
 					}
 			}
 		
@@ -48,9 +53,9 @@ public class Game
 			return guessSplit;
 		}
 		
-		public static void displayGuess(String[] guess, String[] correctWord)
+		public static void displayGuess(String[] guess, String correctWord)
 		{
-			
+			String[] correctSplit = correctWord.split("");
 			String correctWordStr = String.join("", correctWord);
 			for (int i = 0; i < 5; i++)
 				{
@@ -59,7 +64,7 @@ public class Game
 			
 			for (int i = 0; i < 5; i++)
 				{
-					if (guess[i].equals(correctWord[i]))
+					if (guess[i].equals(correctSplit[i]))
 						{
 							Display.colorGrid[guessCounter][i] = "1";
 						}
@@ -77,11 +82,10 @@ public class Game
 		}
 		
 		
-		public static boolean winCheck(String[] guessArray, String[] correctWordArray)
+		public static boolean winCheck(String guessArray[], String correctWord)
 		{
 			boolean won;
 			String guess = String.join("", guessArray);
-			String correctWord = String.join("", correctWordArray);
 			if (guess.equals(correctWord))
 				{
 					System.out.println("You Win!");
